@@ -1,0 +1,206 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты - УК "Домовой"</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>УК "Домовой"</h1>
+                    <span>Умное управление вашим домом</span>
+                </div>
+                <nav class="nav">
+                    <a href="index.html" class="nav-link">Главная</a>
+                    <a href="services.html" class="nav-link">Услуги</a>
+                    <a href="tariffs.html" class="nav-link">Тарифы</a>
+                    <a href="contacts.html" class="nav-link active">Контакты</a>
+                    <a href="personal.html" class="nav-link login-btn">Личный кабинет</a>
+                </nav>
+                <button class="mobile-menu-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="container">
+                <div class="page-hero-content">
+                    <h1>Контакты</h1>
+                    <p>Свяжитесь с нами удобным для вас способом</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="contacts-section">
+            <div class="container">
+                <div class="contacts-grid">
+                    <div class="contact-info">
+                        <h2>Контактная информация</h2>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div class="contact-details">
+                                <h3>Адрес офиса</h3>
+                                <p>г. Москва, ул. Строителей, д. 15, офис 304</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">🕒</div>
+                            <div class="contact-details">
+                                <h3>Режим работы</h3>
+                                <p><strong>Понедельник-Пятница:</strong> 8:00 - 20:00</p>
+                                <p><strong>Суббота:</strong> 9:00 - 18:00</p>
+                                <p><strong>Воскресенье:</strong> 9:00 - 15:00</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">🚨</div>
+                            <div class="contact-details">
+                                <h3>Аварийная служба</h3>
+                                <p>Круглосуточно, без выходных</p>
+                                <p>Обращения принимаются через форму на сайте</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div class="contact-details">
+                                <h3>Диспетчерская служба</h3>
+                                <p>Ежедневно с 7:00 до 23:00</p>
+                                <p>Принимаем заявки на неаварийные работы</p>
+                            </div>
+                        </div>
+
+                        <div class="map-placeholder">
+                            <div class="map-icon">🗺️</div>
+                            <p>Карта проезда будет доступна в ближайшее время</p>
+                            <small>Мы работаем над интеграцией карт в наш сайт</small>
+                        </div>
+                    </div>
+
+                    <div class="contact-form-container">
+                        <h2>Форма обратной связи</h2>
+                        <p>Заполните форму ниже для обращения в управляющую компанию</p>
+
+                        <form class="contact-form" id="contact-form">
+                            <div class="form-group">
+                                <label for="contact-name">ФИО *</label>
+                                <input type="text" id="contact-name" name="name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contact-address">Адрес (дом, квартира) *</label>
+                                <input type="text" id="contact-address" name="address" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contact-email">Email</label>
+                                <input type="email" id="contact-email" name="email">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contact-phone">Телефон</label>
+                                <input type="tel" id="contact-phone" name="phone">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contact-problem">Тип проблемы *</label>
+                                <select id="contact-problem" name="problem" required>
+                                    <option value="">Выберите тип проблемы</option>
+                                    <option value="plumbing">Водоснабжение/канализация</option>
+                                    <option value="electricity">Электроснабжение</option>
+                                    <option value="heating">Отопление</option>
+                                    <option value="elevator">Лифт</option>
+                                    <option value="cleaning">Уборка территории/подъездов</option>
+                                    <option value="payment">Вопросы по платежам</option>
+                                    <option value="other">Другое</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contact-urgency">Срочность</label>
+                                <select id="contact-urgency" name="urgency">
+                                    <option value="normal">Обычная</option>
+                                    <option value="urgent">Срочная</option>
+                                    <option value="emergency">Аварийная</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contact-message">Описание проблемы *</label>
+                                <textarea id="contact-message" name="message" rows="5" placeholder="Опишите вашу проблему подробно..." required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">
+                                Отправить обращение
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="emergency-notice">
+                    <div class="notice-icon">⚠️</div>
+                    <div class="notice-content">
+                        <h3>Важная информация</h3>
+                        <p>Для экстренных случаев (прорыв труб, отключение электричества, заклинивание лифта с людьми) немедленно обращайтесь через форму выше с пометкой "Аварийная".</p>
+                        <p>Среднее время ответа на неаварийные обращения - 24 часа в рабочие дни.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>УК "Домовой"</h3>
+                    <p>Современные решения для управления жилой недвижимостью</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Контакты</h4>
+                    <p>г. Москва, ул. Строителей, д. 15</p>
+                    <p>Пн-Пт: 8:00-20:00</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Сервисы</h4>
+                    <a href="personal.html">Личный кабинет</a>
+                    <a href="services.html">Услуги</a>
+                    <a href="contacts.html">Обратная связь</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 УК "Домовой". Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.getElementById('contact-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById('contact-name').value;
+            const problem = document.getElementById('contact-problem').value;
+
+            if (name && problem) {
+                alert(`Спасибо, ${name}! Ваше обращение принято. Номер заявки: #${Math.floor(Math.random() * 10000)}. Мы свяжемся с вами в ближайшее время.`);
+                document.getElementById('contact-form').reset();
+            } else {
+                alert('Пожалуйста, заполните все обязательные поля (отмечены *)');
+            }
+        });
+    </script>
+</body>
+</html>

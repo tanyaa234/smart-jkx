@@ -1,0 +1,261 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет - УК "Домовой"</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>УК "Домовой"</h1>
+                    <span>Умное управление вашим домом</span>
+                </div>
+                <nav class="nav">
+                    <a href="index.html" class="nav-link">Главная</a>
+                    <a href="services.html" class="nav-link">Услуги</a>
+                    <a href="tariffs.html" class="nav-link">Тарифы</a>
+                    <a href="contacts.html" class="nav-link">Контакты</a>
+                    <a href="personal.html" class="nav-link login-btn active">Личный кабинет</a>
+                </nav>
+                <button class="mobile-menu-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div id="auth-container" class="auth-container">
+        <div class="auth-card">
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="showAuthTab('login')">Вход</button>
+                <button class="auth-tab" onclick="showAuthTab('register')">Регистрация</button>
+            </div>
+
+            <form id="login-form" class="auth-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Пароль</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Войти</button>
+            </form>
+
+            <form id="register-form" class="auth-form" style="display: none;">
+                <div class="form-group">
+                    <label for="register-name">ФИО</label>
+                    <input type="text" id="register-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Email</label>
+                    <input type="email" id="register-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-phone">Телефон</label>
+                    <input type="tel" id="register-phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-address">Адрес</label>
+                    <input type="text" id="register-address" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Пароль</label>
+                    <input type="password" id="register-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-confirm">Подтверждение пароля</label>
+                    <input type="password" id="register-confirm" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Зарегистрироваться</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="personal-container" class="personal-container" style="display: none;">
+        <div class="personal-header">
+            <div class="container">
+                <h1>Личный кабинет</h1>
+                <p id="user-greeting">Добро пожаловать!</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="personal-content">
+                <div class="personal-sidebar">
+                    <nav class="sidebar-nav">
+                        <a href="#" class="sidebar-link active" onclick="showSection('dashboard')">Обзор</a>
+                        <a href="#" class="sidebar-link" onclick="showSection('profile')">Профиль</a>
+                        <a href="#" class="sidebar-link" onclick="showSection('payments')">Платежи</a>
+                        <a href="#" class="sidebar-link" onclick="showSection('meters')">Показания счетчиков</a>
+                        <a href="#" class="sidebar-link" onclick="showSection('requests')">Мои заявки</a>
+                        <a href="#" class="sidebar-link" onclick="logout()">Выйти</a>
+                    </nav>
+                </div>
+
+                <div class="personal-main">
+                    <!-- Dashboard Section -->
+                    <div id="dashboard" class="section active">
+                        <h2>Обзор</h2>
+                        <div class="info-grid">
+                            <div class="info-card">
+                                <h3>Текущая задолженность</h3>
+                                <p id="current-debt">0 ₽</p>
+                            </div>
+                            <div class="info-card">
+                                <h3>Следующий платеж</h3>
+                                <p id="next-payment">0 ₽</p>
+                            </div>
+                            <div class="info-card">
+                                <h3>Активные заявки</h3>
+                                <p id="active-requests">0</p>
+                            </div>
+                        </div>
+
+                        <h3>Последние платежи</h3>
+                        <div class="recent-payments">
+                            <p>Здесь будут отображаться ваши последние платежи</p>
+                        </div>
+                    </div>
+
+                    <!-- Profile Section -->
+                    <div id="profile" class="section">
+                        <h2>Профиль</h2>
+                        <form id="profile-form">
+                            <div class="form-group">
+                                <label for="profile-name">ФИО</label>
+                                <input type="text" id="profile-name">
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-email">Email</label>
+                                <input type="email" id="profile-email">
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-phone">Телефон</label>
+                                <input type="tel" id="profile-phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-address">Адрес</label>
+                                <input type="text" id="profile-address">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                        </form>
+                    </div>
+
+                    <!-- Payments Section -->
+                    <div id="payments" class="section">
+                        <h2>История платежей</h2>
+                        <table class="payments-table">
+                            <thead>
+                                <tr>
+                                    <th>Период</th>
+                                    <th>Сумма</th>
+                                    <th>Статус</th>
+                                    <th>Дата оплаты</th>
+                                </tr>
+                            </thead>
+                            <tbody id="payments-body">
+                                <!-- Данные будут загружены через JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Meters Section -->
+                    <div id="meters" class="section">
+                        <h2>Показания счетчиков</h2>
+                        <form id="meters-form">
+                            <div class="form-group">
+                                <label for="water-meter">Холодная вода</label>
+                                <input type="number" id="water-meter" step="0.001">
+                            </div>
+                            <div class="form-group">
+                                <label for="hot-water-meter">Горячая вода</label>
+                                <input type="number" id="hot-water-meter" step="0.001">
+                            </div>
+                            <div class="form-group">
+                                <label for="electricity-meter">Электричество</label>
+                                <input type="number" id="electricity-meter" step="0.001">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Отправить показания</button>
+                        </form>
+                    </div>
+
+                    <!-- Requests Section -->
+                    <div id="requests" class="section">
+                        <h2>Мои заявки</h2>
+                        <div id="requests-list">
+                            <!-- Заявки будут загружены через JavaScript -->
+                        </div>
+                        <button class="btn btn-primary" onclick="showSection('new-request')">Создать новую заявку</button>
+                    </div>
+
+                    <!-- New Request Section -->
+                    <div id="new-request" class="section">
+                        <h2>Новая заявка</h2>
+                        <form id="request-form">
+                            <div class="form-group">
+                                <label for="request-type">Тип заявки</label>
+                                <select id="request-type">
+                                    <option value="plumbing">Сантехника</option>
+                                    <option value="electricity">Электрика</option>
+                                    <option value="heating">Отопление</option>
+                                    <option value="cleaning">Уборка</option>
+                                    <option value="other">Другое</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="request-description">Описание проблемы</label>
+                                <textarea id="request-description" rows="4"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="request-urgency">Срочность</label>
+                                <select id="request-urgency">
+                                    <option value="normal">Обычная</option>
+                                    <option value="urgent">Срочная</option>
+                                    <option value="emergency">Аварийная</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Отправить заявку</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>УК "Домовой"</h3>
+                    <p>Современные решения для управления жилой недвижимостью</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Контакты</h4>
+                    <p>г. Москва, ул. Строителей, д. 15</p>
+                    <p>Пн-Пт: 8:00-20:00</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Сервисы</h4>
+                    <a href="personal.html">Личный кабинет</a>
+                    <a href="services.html">Услуги</a>
+                    <a href="contacts.html">Обратная связь</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 УК "Домовой". Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/personal.js"></script>
+</body>
+</html>
