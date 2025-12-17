@@ -6,14 +6,12 @@
     }
 
     init() {
-        // Проверяем авторизацию при загрузке
         if (this.currentUser) {
             this.showPersonalCabinet();
         } else {
             this.showAuthForms();
         }
 
-        // Навешиваем обработчики форм
         document.getElementById('login-form').addEventListener('submit', (e) => this.handleLogin(e));
         document.getElementById('register-form').addEventListener('submit', (e) => this.handleRegister(e));
     }
@@ -86,7 +84,6 @@
             return;
         }
 
-        // Создаем нового пользователя
         this.users[email] = {
             name: name,
             email: email,
@@ -122,22 +119,18 @@
         const user = this.users[this.currentUser];
         if (!user) return;
 
-        // Обновляем приветствие
+
         document.getElementById('user-greeting').textContent = `Добро пожаловать, ${user.name}!`;
 
-        // Обновляем профиль
         document.getElementById('profile-name').value = user.name;
         document.getElementById('profile-email').value = user.email;
         document.getElementById('profile-phone').value = user.phone;
         document.getElementById('profile-address').value = user.address;
 
-        // Обновляем платежи
         this.updatePaymentsTable(user.payments);
 
-        // Обновляем заявки
         this.updateRequestsList(user.requests);
 
-        // Обновляем дашборд
         this.updateDashboard(user);
     }
 
@@ -263,7 +256,6 @@
     }
 }
 
-// Глобальные функции для вызова из HTML
 function showAuthTab(tab) {
     document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.auth-form').forEach(f => f.style.display = 'none');
@@ -284,8 +276,8 @@ function logout() {
     authSystem.logout();
 }
 
-// Инициализация системы при загрузке страницы
 let authSystem;
 document.addEventListener('DOMContentLoaded', () => {
     authSystem = new AuthSystem();
 });
+
