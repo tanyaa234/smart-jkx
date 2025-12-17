@@ -229,12 +229,10 @@
     }
 
     showNotification(message, type = 'info') {
-        // Создаем уведомление
         const notification = document.createElement('div');
         notification.className = `notification notification-${type}`;
         notification.textContent = message;
 
-        // Стили для уведомления
         notification.style.cssText = `
             position: fixed;
             top: 20px;
@@ -249,7 +247,6 @@
 
         document.body.appendChild(notification);
 
-        // Удаляем уведомление через 3 секунды
         setTimeout(() => {
             notification.remove();
         }, 3000);
@@ -280,4 +277,5 @@ let authSystem;
 document.addEventListener('DOMContentLoaded', () => {
     authSystem = new AuthSystem();
 });
+
 
