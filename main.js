@@ -1,4 +1,3 @@
-// Mobile menu functionality
 document.addEventListener('DOMContentLoaded', function () {
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const nav = document.querySelector('.nav');
@@ -10,7 +9,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Close mobile menu when clicking on a link
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
         link.addEventListener('click', function () {
@@ -19,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Add active state to current page in navigation
     const currentPage = window.location.pathname.split('/').pop();
     navLinks.forEach(link => {
         const linkPage = link.getAttribute('href');
@@ -31,7 +28,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -45,7 +41,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Form validation helper
 function validateForm(form) {
     const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
     let isValid = true;
@@ -62,7 +57,6 @@ function validateForm(form) {
     return isValid;
 }
 
-// Notification system
 function showNotification(message, type = 'info') {
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
@@ -71,7 +65,7 @@ function showNotification(message, type = 'info') {
         <button class="notification-close">&times;</button>
     `;
 
-    // Add styles if not already added
+
     if (!document.querySelector('#notification-styles')) {
         const styles = document.createElement('style');
         styles.id = 'notification-styles';
@@ -123,10 +117,10 @@ function showNotification(message, type = 'info') {
         notification.remove();
     });
 
-    // Auto remove after 5 seconds
     setTimeout(() => {
         if (notification.parentNode) {
             notification.remove();
         }
     }, 5000);
 }
+
