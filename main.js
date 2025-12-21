@@ -1,126 +1,83 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const nav = document.querySelector('.nav');
-
-    if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', function () {
-            nav.classList.toggle('active');
-            mobileMenuBtn.classList.toggle('active');
-        });
+class PersonalCabinet {
+    constructor(authSystem) {
+        this.authSystem = authSystem;
+        this.init();
     }
 
-    const navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function () {
-            nav.classList.remove('active');
-            mobileMenuBtn.classList.remove('active');
-        });
-    });
+    init() {
+        // Обработчики форм личного кабинета
+        document.getElementById('profile-form').addEventListener('submit', (e) => this.handleProfileUpdate(e));
+        document.getElementById('meters-form').addEventListener('submit', (e) => this.handleMetersSubmit(e));
+        document.getElementById('request-form').addEventListener('submit', (e) => this.handleRequestSubmit(e));
 
-    const currentPage = window.location.pathname.split('/').pop();
-    navLinks.forEach(link => {
-        const linkPage = link.getAttribute('href');
-        if (linkPage === currentPage || (currentPage === '' && linkPage === 'index.html')) {
-            link.classList.add('active');
-        } else {
-            link.classList.remove('active');
-        }
-    });
-});
+        // Инициализация данных при загрузке
+        this.loadInitialData();
+    }
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+    loadInitialData() {
+        // Здесь можно загружать дополнительные данные при необходимости
+    }
+
+    handleProfileUpdate(e) {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
 
-function validateForm(form) {
-    const inputs = form.querySelectorAll('input[required], select[required], textarea[required]');
-    let isValid = true;
+        const user = this.authSystem.users[this.authSystem.currentUser];
+        if (!user) return;
 
-    inputs.forEach(input => {
-        if (!input.value.trim()) {
-            isValid = false;
-            input.style.borderColor = '#ef4444';
-        } else {
-            input.style.borderColor = '';
-        }
-    });
+        // Обновляем данные пользователя
+        user.name = document.getElementById('profile-name').value;
+        user.phone = document.getElementById('profile-phone').value;
+        user.address = document.getElementById('profile-address').value;
 
-    return isValid;
-}
-
-function showNotification(message, type = 'info') {
-    const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    notification.innerHTML = `
-        <div class="notification-content">${message}</div>
-        <button class="notification-close">&times;</button>
-    `;
-
-
-    if (!document.querySelector('#notification-styles')) {
-        const styles = document.createElement('style');
-        styles.id = 'notification-styles';
-        styles.textContent = `
-            .notification {
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                padding: 1rem 1.5rem;
-                background: #3b82f6;
-                color: white;
-                border-radius: 8px;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                z-index: 10000;
-                display: flex;
-                align-items: center;
-                gap: 1rem;
-                max-width: 400px;
-                animation: slideIn 0.3s ease;
-            }
-            .notification-success { background: #10b981; }
-            .notification-error { background: #ef4444; }
-            .notification-warning { background: #f59e0b; }
-            .notification-close {
-                background: none;
-                border: none;
-                color: white;
-                font-size: 1.5rem;
-                cursor: pointer;
-                padding: 0;
-                width: 24px;
-                height: 24px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            @keyframes slideIn {
-                from { transform: translateX(100%); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
-            }
-        `;
-        document.head.appendChild(styles);
+        this.authSystem.saveUsers();
+        this.authSystem.updateUserInterface();
+        this.authSystem.showNotification('Профиль успешно обновлен', 'success');
     }
 
-    document.body.appendChild(notification);
+    handleMetersSubmit(e) {
+        e.preventDefault();
 
-    // Close button functionality
-    notification.querySelector('.notification-close').addEventListener('click', () => {
-        notification.remove();
-    });
+        const water = document.getElementById('water-meter').value;
+        const hotWater = document.getElementById('hot-water-meter').value;
+        const electricity = document.getElementById('electricity-meter').value;
 
-    setTimeout(() => {
-        if (notification.parentNode) {
-            notification.remove();
-        }
-    }, 5000);
+        // В реальном приложении здесь была бы отправка на сервер
+        this.authSystem.showNotification('Показания счетчиков отправлены', 'success');
+        document.getElementById('meters-form').reset();
+    }
+
+    handleRequestSubmit(e) {
+        e.preventDefault();
+
+        const type = document.getElementById('request-type').value;
+        const description = document.getElementById('request-description').value;
+        const urgency = document.getElementById('request-urgency').value;
+
+        const user = this.authSystem.users[this.authSystem.currentUser];
+        if (!user) return;
+
+        // Создаем новую заявку
+        const newRequest = {
+            id: Date.now(),
+            type: type,
+            description: description,
+            urgency: urgency,
+            status: 'new',
+            date: new Date().toISOString(),
+            address: user.address
+        };
+
+        user.requests.unshift(newRequest);
+        this.authSystem.saveUsers();
+        this.authSystem.updateUserInterface();
+
+        this.authSystem.showNotification('Заявка успешно создана', 'success');
+        document.getElementById('request-form').reset();
+        showSection('requests');
+    }
 }
 
+// Инициализация личного кабинета после авторизации
+document.addEventListener('DOMContentLoaded', () => {
+    // PersonalCabinet будет инициализирован после авторизации через authSystem
+});
